@@ -1,0 +1,19 @@
+app-id: net.sytes.brpxd.DockerBackup
+runtime: org.freedesktop.Platform
+runtime-version: '21.08'
+sdk: org.freedesktop.Sdk
+command: docker_backup
+modules:
+  - name: python3
+    buildsystem: meson
+    config-opts:
+      - -Dpython3=true
+  - name: docker_backup
+    buildsystem: simple
+    build-commands:
+      - pip install -r requirements.txt
+    sources:
+      - type: file
+        path: docker_backup.py
+      - type: file
+        path: requirements.txt
