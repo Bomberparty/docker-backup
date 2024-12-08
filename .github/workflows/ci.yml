@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Build Flatpak
+        run: bash build_flatpak.sh
+      - name: Upload Flatpak artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: docker_backup.flatpak
+          path: docker_backup.flatpak
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Build EXE
+        run: powershell -File build_exe.ps1
+      - name: Upload EXE artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: docker_backup.exe
+          path: docker_backup.exe
