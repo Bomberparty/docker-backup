@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Install Flatpak and Flatpak Builder
-sudo apt-get update
-sudo apt-get install -y flatpak flatpak-builder
+sudo dnf install -y flatpak flatpak-builder
 
 # Add Flathub repository
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
