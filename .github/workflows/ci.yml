@@ -24,7 +24,7 @@ jobs:
       - name: Build Flatpak
         run: bash build_flatpak.sh
       - name: Upload Flatpak artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: docker_backup.flatpak
           path: docker_backup.flatpak
@@ -44,7 +44,7 @@ jobs:
       - name: Build EXE
         run: powershell -File build_exe.ps1
       - name: Upload EXE artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: docker_backup.exe
           path: docker_backup.exe
